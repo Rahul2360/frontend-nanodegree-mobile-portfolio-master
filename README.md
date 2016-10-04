@@ -2,7 +2,7 @@
 1. The goal of this project was to optimize a website as much as possible
 2. We have to optimize the performance of the website and make it faster.
 
-  <a href="index.html">index.html</a>
+  <a href="https://rahul2360.github.io/frontend-nanodegree-mobile-portfolio-master/">index.html</a>
   Open this link.
   This link will be send to portfolio page
 ####Tools Used :
