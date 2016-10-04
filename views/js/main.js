@@ -307,12 +307,12 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    var pizzaContainerValue = document.getElementByClassName("randomPizzaContainer");
+    var pizzaContainerValue = document.getElementsByClassName("randomPizzaContainer");
       var i;
       var j=pizzaContainerValue.length;
       var dx = determineDx(pizzaContainerValue[0],size);
       var newwidth = (pizzaContainerValue[0].offsetWidth + dx) + 'px';
-      for(i=0;i<j;i++)
+      for(i=0;i<j;i++){
       pizzaContainerValue[i].style.width = newwidth;
     }
   }
@@ -333,6 +333,7 @@ for (var i = 2; i < 100; i++) {
   var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
+
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
@@ -362,14 +363,19 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
-  var phase =[];
-
-  for (var i = 0; i < items.length; i++) {
-   phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));}
-   for (var i = 0; i < items.length; i++) {
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-  }
+//  var items = document.querySelectorAll('.mover');
+//var phase =[];
+//  for (var i = 0; i < items.length; i++) {
+// phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));}
+//   for (var i = 0; i < items.length; i++) {
+//    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+//  }
+var items = document.getElementsByClassName('mover');
+var top = document.body.scrollTop / 1250;
+for (var i = 0, phase, len = items.length; i < len; i++) {
+ phase = Math.sin(top + i % 5);
+ items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+}
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -389,12 +395,13 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   var getPizzaNumber;
-  var pizzacount= getPizzaNumber();
-  getPizzaNumber = function(){
-      var rahul;
-      rahul = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+   var getPizzaNumber = function(){
+
+      var rahul = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
       return Math.round(rahul/ 4 / 8);
   }
+  var pizzacount= getPizzaNumber();
   for (cols,s,i=30;i--;) {
     var elem = document.createElement('img');
     elem.className = 'mover';
